@@ -32,7 +32,7 @@ export default function ReportDetails({ selectedId }: { selectedId: string | nul
                     <div className='flex items-center  gap-3 '>
 
                         <div>
-                            <img src="https://i.pravatar.cc/150?u=a042581f4e29" alt="customer report" width={100} height={100} className='w-[60px] h-[60px] rounded-full' />
+                            <img src="/NoImage.jpeg" alt="customer report" width={100} height={100} className='w-[60px] h-[60px] rounded-full object-cover' />
                         </div>
                         <div>
                             <p className='text-[#2A3542] [font-family:Lora] text-lg font-bold leading-[130%]'>David John</p>

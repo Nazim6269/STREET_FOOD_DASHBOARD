@@ -1,5 +1,3 @@
-import EmptyState from '@/components/reusable/EmptyState';
-import { useDashboardOverview, useDashboardRevenue } from '@/hooks/useDashboardOverview';
 import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell } from 'recharts';
 
@@ -23,45 +21,24 @@ export default function TopVendors() {
   const [activeTab, setActiveTab] = useState('revenue');
   const currentData = activeTab === 'sales' ? salesData : revenueData;
 
-  // Calculate max for the scale at the bottom
   const domainMax = 150000;
 
-  const { data: dashboardRevenue } = useDashboardRevenue(
-    {
-      // range: "month",
-      metric: "revenue",
-    } 
-  );
-  const { data: dashboardSales } = useDashboardRevenue(
-    {
-      range: "year",
-      metric: "orders",
-    } 
-  );
-
-
-
-  console.log(dashboardRevenue, "dashboardRevenue");
-  console.log(dashboardSales, "dashboardSales");
-
-  
-
   return (
-    <div className="w-full h-full p-6 bg-white rounded-3xl border border-gray-100 shadow-sm font-sans">
+    <div className="w-full h-full p-6 bg-white rounded-2xl border border-purple-100 shadow-sm">
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <h3 className="section-title">Top 5 Vendors</h3>
-        <div className="flex bg-gray-100 p-1 rounded-xl gap-1">
+        <div className="flex bg-purple-50 p-1 rounded-xl gap-1">
           <button
             onClick={() => setActiveTab('sales')}
-            className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${activeTab === 'sales' ? 'bg-[#7C3AED] text-white shadow-sm' : 'text-gray-500'
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === 'sales' ? 'bg-gradient-to-r from-[#4C1D95] to-[#7C3AED] text-white shadow-sm' : 'text-[#64748b] hover:text-[#2A3542]'
               }`}
           >
             By Sales
           </button>
           <button
             onClick={() => setActiveTab('revenue')}
-            className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${activeTab === 'revenue' ? 'bg-[#7C3AED] text-white shadow-sm' : 'text-gray-500'
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === 'revenue' ? 'bg-gradient-to-r from-[#4C1D95] to-[#7C3AED] text-white shadow-sm' : 'text-[#64748b] hover:text-[#2A3542]'
               }`}
           >
             By Revenue
@@ -69,66 +46,54 @@ export default function TopVendors() {
         </div>
       </div>
 
-      {/* Rows Construction */}
-      {
-        currentData.length > 0 ? (
-          <>
-
-            <div className="space-y-6 mb-2">
-              {currentData.map((item, index) => (
-                <div key={index} className="flex flex-col gap-2">
-                  {/* Label Row */}
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="font-medium text-slate-500">{item.name}</span>
-                    <span className={`font-medium ${index === 0 ? 'text-[#7C3AED]' : 'text-slate-500'}`}>
-                      {
-                        activeTab === 'sales' ? `${item.value.toLocaleString()} orders` : `$${item.value.toLocaleString()}`
-                      }
-                    </span>
-                  </div>
-
-                  {/* Bar Row - Fixed height container for each bar */}
-                  <div className="h-4 w-full ">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <BarChart
-                        layout="vertical"
-                        data={[item]} // Each bar is its own chart for perfect alignment
-                        margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
-                      >
-                        <XAxis type="number" domain={[0, domainMax]} hide />
-                        <YAxis type="category" dataKey="name" hide />
-                        <Bar
-                          dataKey="value"
-                          radius={[10, 10, 10, 10]}
-                          background={{ fill: '#F1F5F9', radius: 10 }}
-                          barSize={16}
-                        >
-                          <Cell fill={item.color} />
-                        </Bar>
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </div>
-                </div>
-              ))}
+      {/* Rows */}
+      <div className="space-y-5">
+        {currentData.map((item, index) => (
+          <div key={index} className="flex flex-col gap-2">
+            <div className="flex justify-between items-center text-sm">
+              <div className="flex items-center gap-3">
+                <span className="flex items-center justify-center w-7 h-7 rounded-full bg-purple-100 text-[#4C1D95] text-xs font-bold">
+                  {index + 1}
+                </span>
+                <span className="font-medium text-[#2A3542]">{item.name}</span>
+              </div>
+              <span className={`font-semibold ${index === 0 ? 'text-[#4C1D95]' : 'text-[#64748b]'}`}>
+                {activeTab === 'sales' ? `${item.value.toLocaleString()} orders` : `$${item.value.toLocaleString()}`}
+              </span>
             </div>
 
-            {/* Common X-Axis Labels at the bottom */}
-            <div className="flex justify-between px-1 mt-4 text-[11px] text-slate-400 font-medium border-t pt-4">
-              <span>0</span>
-              <span>25k</span>
-              <span>50k</span>
-              <span>75k</span>
-              <span>150k</span>
+            <div className="h-4 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  layout="vertical"
+                  data={[item]}
+                  margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
+                >
+                  <XAxis type="number" domain={[0, domainMax]} hide />
+                  <YAxis type="category" dataKey="name" hide />
+                  <Bar
+                    dataKey="value"
+                    radius={[10, 10, 10, 10]}
+                    background={{ fill: '#F1F5F9', radius: 10 }}
+                    barSize={16}
+                  >
+                    <Cell fill={item.color} />
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
             </div>
-          </>
+          </div>
+        ))}
+      </div>
 
-
-        ) : (
-          <EmptyState imageSrc="/images/empty-data/top-vendors.png" title="No reports to show" description="Vendor reports will appear in here." />
-        )
-      }
-
-
+      {/* X-Axis Labels */}
+      <div className="flex justify-between px-1 mt-6 text-[11px] text-[#94a3b8] font-medium border-t border-purple-50 pt-4">
+        <span>0</span>
+        <span>25k</span>
+        <span>50k</span>
+        <span>75k</span>
+        <span>150k</span>
+      </div>
     </div>
   );
 }

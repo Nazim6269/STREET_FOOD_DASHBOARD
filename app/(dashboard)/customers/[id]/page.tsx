@@ -6,7 +6,7 @@ import CustomerProfileDetails from "./_components/CustomerProfileDetails";
 const fakeCustomer = {
     name: "David John",
     id: "99283",
-    avatarUrl: "https://i.pravatar.cc/150?u=21332", // Using a placeholder service
+    avatarUrl: "/NoImage.jpeg",
     totalOrders: 1278,
     totalSpent: 4889.00,
     info: {

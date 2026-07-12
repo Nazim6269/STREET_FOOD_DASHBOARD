@@ -180,7 +180,7 @@ const ProfileItem = () => {
   return (
     <div className='flex items-center gap-3'>
       <div className='flex w-9 h-9 justify-center items-center border border-gray-200 rounded-full relative'>
-        <Image src='https://randomuser.me/api/portraits/men/36.jpg' alt='profile' fill className='absolute w-full h-full object-cover rounded-full' />
+        <Image src='/NoImage.jpeg' alt='profile' fill className='absolute w-full h-full object-cover rounded-full' />
       </div>
 
       <div>

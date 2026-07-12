@@ -14,7 +14,7 @@ export default function VendorDetailCard({
       <div className="flex items-center gap-5">
         <div className="relative w-[84px] h-[84px] rounded-full overflow-hidden border-2 border-white shadow-inner">
           <Image
-            src={data?.coverImage || "/images/vendor-avatar.png"}
+            src={data?.coverImage || "/NoImage.jpeg"}
             alt={data?.businessName || ""}
             fill
             className="object-cover"

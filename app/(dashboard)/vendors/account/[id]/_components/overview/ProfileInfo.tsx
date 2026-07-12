@@ -20,7 +20,7 @@ export default function ProfileInfo({ vendor, contactInfo, businessProfile }: { 
 
             <div className="flex  flex-col items-center gap-4 flex-1 w-full max-w-[554px]  self-stretch border border-[#ECEFF3] [background:var(--Background-White,#FFF)] shadow-[0_0_16px_0_rgba(0,0,0,0.06)] rounded-l-2xl  border-solid p-6">
                 <div className="relative w-32 h-32 rounded-full overflow-hidden border">
-                    <Image src={vendor?.coverImage || "/images/vendor-avatar.png"} alt={vendor?.businessName || ""} fill className="object-cover" />
+                    <Image src={vendor?.coverImage || "/NoImage.jpeg"} alt={vendor?.businessName || ""} fill className="object-cover" />
                 </div>
                 <div className="text-center">
                     <h2 className="text-[color:var(--Stroke,#2A3542)] [font-family:Lora] text-2xl font-bold leading-[130%] tracking-[0.48px] flex items-center justify-center gap-2">

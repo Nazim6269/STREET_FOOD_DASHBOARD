@@ -66,7 +66,7 @@ export default function AdminInformationPage() {
           <div className='flex flex-col items-center p-6 rounded-2xl border border-purple-100 bg-purple-50/30'>
             <div className='relative mb-4'>
               <img 
-                src={imagePreview || "https://randomuser.me/api/portraits/men/36.jpg"} 
+                src={imagePreview || "/NoImage.jpeg"} 
                 alt="Profile" 
                 className='w-24 h-24 rounded-2xl object-cover ring-4 ring-white shadow-lg' 
               />

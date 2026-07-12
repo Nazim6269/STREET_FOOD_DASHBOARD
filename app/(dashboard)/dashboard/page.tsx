@@ -4,26 +4,35 @@ import HeaderNotifyIcons from "@/components/icons/HeaderNotifyIcons";
 import { ReusableSelect } from "@/components/form/CustomSelect";
 import { useState } from "react";
 import { RefreshCcwIcon } from "lucide-react";
-import { PendingVendorVerifications, VendorsByStatus, TopVendors, PlatformRevenueChart, DashboardStats, DashboardGraph } from "./_components";
+import { PendingVendorVerifications, VendorsByStatus, TopVendors, PlatformRevenueChart, DashboardStats } from "./_components";
 import PageTitle from "@/components/reusable/PageTitle";
-import { useDashboardOverview } from "@/hooks/useDashboardOverview";
-import type { DashboardAlerts } from "@/types/dashboard.types";
-
 
 export default function DashboardPage() {
-
     const [selectedOption, setSelectedOption] = useState("this-month");
 
-    const { data: dashboardOverview } = useDashboardOverview();
-  
+    const dummyAlerts = {
+        issuesNeedAttention: 3,
+        pendingOnboarding: 12,
+        inactiveVendors: 5,
+        todayRevenue: 12450,
+        currency: "USD",
+    };
+
+    const dummyVendorsByStatus = {
+        total: 1284,
+        pending: 156,
+        verified: 842,
+        expired: 124,
+        suspended: 89,
+        rejected: 73,
+    };
+
     return (
         <div className="md:space-y-6 space-y-4">
             {/* Header Section */}
             <div className="flex md:flex-row flex-col md:items-center md:justify-between gap-6">
-                {/* Left Side - Welcome Text */}
                 <PageTitle title="Welcome, Nazim uddin 👋" description="Manage your platform data, operational health and vendor ecosystem status." />
 
-                {/* Right Side - Action Buttons */}
                 <div className="flex items-center gap-3">
                     <ReusableSelect
                         variant="outline"
@@ -46,28 +55,25 @@ export default function DashboardPage() {
             </div>
 
             {/* Notification Cards Grid */}
-            <DashboardAlerts alerts={dashboardOverview?.alerts} />
+            <DashboardAlerts alerts={dummyAlerts} />
 
-            <DashboardStats summary={dashboardOverview?.summary} />
+            <DashboardStats summary={undefined} />
 
             <section className="flex flex-col md:flex-row items-center justify-between gap-4">
-                <div className="w-full  flex-1">
+                <div className="w-full flex-1">
                     <PlatformRevenueChart />
                 </div>
-                <VendorsByStatus vendorsByStatus={dashboardOverview?.vendorsByStatus} />
+                <VendorsByStatus vendorsByStatus={dummyVendorsByStatus} />
             </section>
 
-
-            {/* Pending         rifications */}
-            <section className="flex flex-col md:flex-row  justify-between gap-4">
-
-                <div className="w-full  flex-1">
+            {/* Pending Verifications */}
+            <section className="flex flex-col md:flex-row justify-between gap-4">
+                <div className="w-full flex-1">
                     <PendingVendorVerifications />
                 </div>
-                <div className="w-full  flex-1">
+                <div className="w-full flex-1">
                     <TopVendors />
                 </div>
-
             </section>
         </div>
     );
@@ -82,27 +88,25 @@ interface HeaderNotifyCardProps {
 const HeaderNotifyCard = ({ icon, title, color }: HeaderNotifyCardProps) => {
     return (
         <div
-            className="flex items-center gap-2 flex-[1_0_0] px-4 py-3 rounded-lg"
-            style={{ backgroundColor: color }}
+            className="flex items-center gap-3 flex-[1_0_0] px-5 py-4 rounded-xl border border-purple-100 bg-white shadow-sm hover:shadow-md transition-shadow"
         >
-            {icon}
-            <p className="text-[#2A3542] font-inter text-base font-medium leading-[160%]">
+            <div className="flex items-center justify-center w-10 h-10 rounded-lg" style={{ backgroundColor: color }}>
+                {icon}
+            </div>
+            <p className="text-[#2A3542] font-inter text-sm font-medium leading-[160%]">
                 {title}
             </p>
         </div>
     );
 };
 
-const DashboardAlerts = ({ alerts }: { alerts: DashboardAlerts | undefined }) => {
-    console.log("alerts", alerts);
-
-
+const DashboardAlerts = ({ alerts }: { alerts: any }) => {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 border border-solid  bg-white shadow-[0_2px_20px_0_rgba(0,0,0,0.10)] p-4 rounded-2xl">
-            <HeaderNotifyCard icon={<HeaderNotifyIcons.Issue />} title={`${alerts?.issuesNeedAttention || 0} Issue needs attention`} color="#DDD6FE" />
-            <HeaderNotifyCard icon={<HeaderNotifyIcons.Onboarding />} title={`${alerts?.pendingOnboarding || 0} Onboarding pending`} color="#EDE9FE" />
-            <HeaderNotifyCard icon={<HeaderNotifyIcons.Inactive />} title={`${alerts?.inactiveVendors || 0} Inactive vendor`} color="#F5F3FF" />
-            <HeaderNotifyCard icon={<HeaderNotifyIcons.Revenue />} title={`${alerts?.todayRevenue || 0} Revenue updated: ${alerts?.currency || ''}`} color="#E8E0F5" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <HeaderNotifyCard icon={<HeaderNotifyIcons.Issue />} title={`${alerts?.issuesNeedAttention || 3} Issue needs attention`} color="#EDE9FE" />
+            <HeaderNotifyCard icon={<HeaderNotifyIcons.Onboarding />} title={`${alerts?.pendingOnboarding || 12} Onboarding pending`} color="#F5F3FF" />
+            <HeaderNotifyCard icon={<HeaderNotifyIcons.Inactive />} title={`${alerts?.inactiveVendors || 5} Inactive vendor`} color="#DDD6FE" />
+            <HeaderNotifyCard icon={<HeaderNotifyIcons.Revenue />} title={`$${(alerts?.todayRevenue || 12450).toLocaleString()} Revenue today`} color="#EDE9FE" />
         </div>
     );
 };

@@ -10,14 +10,14 @@ interface FavoriteUser {
 }
 
 const favorites: FavoriteUser[] = [
-  { id: '1', name: 'Aiony Haust', followerSince: 'Oct 2023', orders: 15, avatar: '/avatar1.jpg' },
-  { id: '2', name: 'Ralph Edwards', followerSince: 'Oct 2023', orders: 12, avatar: '/avatar2.jpg' },
-  { id: '3', name: 'Floyd Miles', followerSince: 'Oct 2023', orders: 4, avatar: '/avatar3.jpg' },
-  { id: '4', name: 'Eleanor Pena', followerSince: 'Oct 2023', orders: 4, avatar: '/avatar4.jpg' },
-  { id: '1', name: 'Aiony Haust', followerSince: 'Oct 2023', orders: 15, avatar: '/avatar1.jpg' },
-  { id: '2', name: 'Ralph Edwards', followerSince: 'Oct 2023', orders: 12, avatar: '/avatar2.jpg' },
-  { id: '3', name: 'Floyd Miles', followerSince: 'Oct 2023', orders: 4, avatar: '/avatar3.jpg' },
-  { id: '4', name: 'Eleanor Pena', followerSince: 'Oct 2023', orders: 4, avatar: '/avatar4.jpg' },
+  { id: '1', name: 'Aiony Haust', followerSince: 'Oct 2023', orders: 15, avatar: '/NoImage.jpeg' },
+  { id: '2', name: 'Ralph Edwards', followerSince: 'Oct 2023', orders: 12, avatar: '/NoImage.jpeg' },
+  { id: '3', name: 'Floyd Miles', followerSince: 'Oct 2023', orders: 4, avatar: '/NoImage.jpeg' },
+  { id: '4', name: 'Eleanor Pena', followerSince: 'Oct 2023', orders: 4, avatar: '/NoImage.jpeg' },
+  { id: '5', name: 'Aiony Haust', followerSince: 'Oct 2023', orders: 15, avatar: '/NoImage.jpeg' },
+  { id: '6', name: 'Ralph Edwards', followerSince: 'Oct 2023', orders: 12, avatar: '/NoImage.jpeg' },
+  { id: '7', name: 'Floyd Miles', followerSince: 'Oct 2023', orders: 4, avatar: '/NoImage.jpeg' },
+  { id: '8', name: 'Eleanor Pena', followerSince: 'Oct 2023', orders: 4, avatar: '/NoImage.jpeg' },
 ];
 
 export default function FavoritesCountCard({ favorites }: { favorites: FavoritesType }) {
@@ -29,7 +29,7 @@ export default function FavoritesCountCard({ favorites }: { favorites: Favorites
     name: item.name || '',
     followerSince: item.followerSince || '',
     orders: item.orders || 0,
-    avatar: item.avatar || '/avatar1.jpg',
+    avatar: item.avatar || '/NoImage.jpeg',
   }));
 
   console.log("data", data);
