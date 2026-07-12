@@ -40,7 +40,7 @@ export default function PlanCard({ plan }: { plan: Plan }) {
         <div className="space-y-4 overflow-hidden">
           {plan.features.map((feature) => (
             <div key={feature} className="flex items-start gap-3">
-              <span className="mt-[9px] h-[5px] w-[5px] shrink-0 rounded-full border border-[#3AC2C2]" />
+              <span className="mt-[9px] h-[5px] w-[5px] shrink-0 rounded-full border border-[#7C3AED]" />
 
               <p className="m-0 text-sm font-normal leading-[160%] text-[#585D63]">
                 {feature}

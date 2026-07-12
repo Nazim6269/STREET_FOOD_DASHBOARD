@@ -36,11 +36,11 @@ const getColumns = (): Column<Vendor>[] => [
     {
         header: "Plan",
         cell: (row) => (
-            <div className={`inline-flex items-center gap-2 rounded-full px-4 py-2 ${row.plan === 'Starter' ? 'bg-yellow-400/20' : row.plan === 'Elite' ? 'bg-orange-400/20' : 'bg-yellow-500/20'}`}>
+            <div className={`inline-flex items-center gap-2 rounded-full px-4 py-2 ${row.plan === 'Starter' ? 'bg-purple-100' : row.plan === 'Elite' ? 'bg-purple-200' : 'bg-purple-50'}`}>
             
                 <div className={cn("w-3 h-3 rounded-full",
-                    row.plan === 'Starter' ? 'bg-yellow-400' :
-                        row.plan === 'Elite' ? 'bg-orange-400' : 'bg-yellow-500'
+                    row.plan === 'Starter' ? 'bg-[#7C3AED]' :
+                        row.plan === 'Elite' ? 'bg-[#4C1D95]' : 'bg-[#8B5CF6]'
                 )} />
                 <span className="text-[color:var(--B,#070707)] [font-family:Inter] text-sm font-medium leading-[130%]">{row.plan}</span>
             </div>
