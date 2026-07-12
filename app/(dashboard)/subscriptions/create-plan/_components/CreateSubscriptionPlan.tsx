@@ -2,14 +2,13 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ReusableSelect } from "@/components/form/CustomSelect";
+import GenericInput from "@/components/common/generic-input/GenericInput";
 
 export default function CreateSubscriptionPlan() {
   return (
     <div className="w-full space-y-7">
-
 
       {/* Main Content */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -20,33 +19,42 @@ export default function CreateSubscriptionPlan() {
           </h3>
 
           <div className="space-y-6">
-            <InputField label="Plan Name" placeholder="Enter plan name" />
-
-            <TextareaField
-              label="Descriptions"
-              placeholder="Enter Descriptions"
-              className="h-[104px]"
+            <GenericInput
+              label="Plan Name"
+              placeholder="Enter plan name"
+              size="sm"
             />
 
-            <InputField label="Price" placeholder="0" />
+            <div>
+              <label className="mb-2 block text-sm font-medium text-[#697586]">
+                Descriptions
+              </label>
+              <textarea
+                placeholder="Enter Descriptions"
+                rows={4}
+                className="w-full resize-none rounded-xl border border-purple-200 bg-[#F8FAFC] px-5 py-3 text-sm text-[#161618] outline-none placeholder:text-[#A0AEC0] focus:border-[#7C3AED] focus:ring-2 focus:ring-purple-100 transition"
+              />
+            </div>
 
-
+            <GenericInput
+              label="Price"
+              placeholder="0"
+              size="sm"
+            />
 
             <div>
-              <label className="mb-2 block self-stretch text-[#697586] font-bold leading-[130%] font-lora">
+              <label className="mb-2 block text-sm font-medium text-[#697586]">
                 Currency
               </label>
-              <ReusableSelect className="flex h-[54px] w-full items-center justify-between rounded-md border border-[#DFE1E7] bg-[#F8FAFC] px-4 text-sm text-[#A0AEC0]" placeholder="Select Currency" options={[{ value: "USD", label: "USD" }, { value: "EUR", label: "EUR" }, { value: "GBP", label: "GBP" }, { value: "JPY", label: "JPY" }, { value: "AUD", label: "AUD" }, { value: "CAD", label: "CAD" }, { value: "CHF", label: "CHF" }, { value: "CNY", label: "CNY" }, { value: "SEK", label: "SEK" }, { value: "NZD", label: "NZD" }]} onValueChange={() => { }} />
+              <ReusableSelect className="flex h-[54px] w-full items-center justify-between rounded-xl border border-purple-200 bg-[#F8FAFC] px-5 text-sm text-[#A0AEC0] focus:border-[#7C3AED] focus:ring-2 focus:ring-purple-100 transition" placeholder="Select Currency" options={[{ value: "USD", label: "USD" }, { value: "EUR", label: "EUR" }, { value: "GBP", label: "GBP" }, { value: "JPY", label: "JPY" }, { value: "AUD", label: "AUD" }, { value: "CAD", label: "CAD" }, { value: "CHF", label: "CHF" }, { value: "CNY", label: "CNY" }, { value: "SEK", label: "SEK" }, { value: "NZD", label: "NZD" }]} onValueChange={() => { }} />
             </div>
-
 
             <div>
-              <label className="mb-2 block self-stretch text-[#697586] font-bold leading-[130%] font-lora">
+              <label className="mb-2 block text-sm font-medium text-[#697586]">
                 Billing Period
               </label>
-              <ReusableSelect className="flex h-[54px] w-full items-center justify-between rounded-md border border-[#DFE1E7] bg-[#F8FAFC] px-4 text-sm text-[#A0AEC0]" placeholder="Select Billing Period" options={[{ value: "Monthly", label: "Monthly" }, { value: "Yearly", label: "Yearly" }]} onValueChange={() => { }} />
+              <ReusableSelect className="flex h-[54px] w-full items-center justify-between rounded-xl border border-purple-200 bg-[#F8FAFC] px-5 text-sm text-[#A0AEC0] focus:border-[#7C3AED] focus:ring-2 focus:ring-purple-100 transition" placeholder="Select Billing Period" options={[{ value: "Monthly", label: "Monthly" }, { value: "Yearly", label: "Yearly" }]} onValueChange={() => { }} />
             </div>
-
 
           </div>
         </div>
@@ -66,7 +74,7 @@ export default function CreateSubscriptionPlan() {
 
         <Button
           type="button"
-          className="h-[54px] min-w-[220px] rounded-xl bg-[#7C3AED] text-sm font-semibold text-white hover:bg-[#6D28D9]"
+          className="h-[54px] min-w-[220px] rounded-xl bg-gradient-to-r from-[#4C1D95] to-[#7C3AED] text-sm font-semibold text-white hover:shadow-lg hover:shadow-purple-500/30 transition-all"
         >
           Create Plan
         </Button>
@@ -74,78 +82,6 @@ export default function CreateSubscriptionPlan() {
     </div>
   );
 }
-
-function InputField({
-  label,
-  placeholder,
-}: {
-  label: string;
-  placeholder: string;
-}) {
-  return (
-    <div>
-      <label className="mb-2 block self-stretch text-[#697586] font-bold leading-[130%] font-lora">
-        {label}
-      </label>
-      <input
-        placeholder={placeholder}
-        className="h-[54px] w-full rounded-md border border-[#DFE1E7] bg-[#F8FAFC] px-4 text-sm text-[#161618] outline-none placeholder:text-[#A0AEC0] focus:border-[#7C3AED]"
-      />
-    </div>
-  );
-}
-
-function TextareaField({
-  label,
-  placeholder,
-  className = "",
-}: {
-  label: string;
-  placeholder: string;
-  className?: string;
-}) {
-  return (
-    <div>
-      <label className="mb-2 block self-stretch text-[#697586] font-bold leading-[130%] font-lora">
-        {label}
-      </label>
-      <textarea
-        placeholder={placeholder}
-        className={`w-full resize-none rounded-md border border-[#DFE1E7] bg-[#F8FAFC] px-4 py-3 text-sm text-[#161618] outline-none placeholder:text-[#A0AEC0] focus:border-[#7C3AED] ${className}`}
-      />
-    </div>
-  );
-}
-
-function SelectField({
-  label,
-  placeholder,
-}: {
-  label: string;
-  placeholder: string;
-}) {
-  return (
-    <div>
-      <label className="mb-2 block text-sm font-semibold text-[#697586]">
-        {label}
-      </label>
-
-
-
-      <button
-        type="button"
-        className="flex h-[54px] w-full items-center justify-between rounded-md border border-[#DFE1E7] bg-[#F8FAFC] px-4 text-sm text-[#A0AEC0]"
-      >
-        {placeholder}
-        <ChevronDown className="h-4 w-4 text-[#697586]" />
-      </button>
-    </div>
-  );
-}
-
-
-
-
 
 import { Edit2, Plus } from "lucide-react";
 
@@ -246,7 +182,8 @@ function PlanFeaturesCard() {
             value={featureText}
             onChange={(e) => setFeatureText(e.target.value)}
             placeholder="Write feature description..."
-            className="h-[104px] w-full resize-none rounded-md border border-[#DFE1E7] bg-white px-4 py-3 text-sm text-[#161618] outline-none placeholder:text-[#A0AEC0] focus:border-[#7C3AED]"
+            rows={4}
+            className="w-full resize-none rounded-xl border border-purple-200 bg-white px-5 py-3 text-sm text-[#161618] outline-none placeholder:text-[#A0AEC0] focus:border-[#7C3AED] focus:ring-2 focus:ring-purple-100 transition"
           />
         </div>
 
