@@ -3,6 +3,7 @@
 import React, { useState, useRef } from 'react';
 import { Upload, Trash2, Pencil, User, Mail, Shield, Phone, MapPin, Calendar, BadgeCheck } from 'lucide-react';
 import GenericInput from '@/components/common/generic-input/GenericInput';
+import GenericButton from '@/components/common/generic-button/GenericButton';
 
 export default function AdminInformationPage() {
   const [isEditing, setIsEditing] = useState(false);
@@ -82,12 +83,16 @@ export default function AdminInformationPage() {
             <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleImageChange} />
             
             <div className='flex gap-2 w-full mt-4'>
-              <button 
+              <GenericButton
+                type="button"
+                title="Upload"
+                variant="violet"
+                size="default"
+                align="center"
+                className="flex-1"
+                icon={<Upload size={14} />}
                 onClick={() => fileInputRef.current?.click()}
-                className='flex-1 flex justify-center items-center gap-2 bg-gradient-to-r from-[#4C1D95] to-[#7C3AED] text-white py-2 rounded-xl text-sm font-medium'
-              >
-                <Upload size={14} /> Upload
-              </button>
+              />
               <button 
                 onClick={() => { setImage(null); setImagePreview(null); }}
                 className='px-3 py-2 rounded-xl border border-red-200 text-red-500 hover:bg-red-50 transition-colors'

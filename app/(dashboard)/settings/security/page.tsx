@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Lock, Shield } from "lucide-react";
 import GenericInput from "@/components/common/generic-input/GenericInput";
+import GenericButton from "@/components/common/generic-button/GenericButton";
 
 export default function SecurityPage() {
     const [formData, setFormData] = useState({
@@ -40,18 +41,22 @@ export default function SecurityPage() {
     return (
         <div className="space-y-6">
             <div className="flex justify-end gap-3">
-                <button
+                <GenericButton
+                    type="button"
+                    title="Cancel"
+                    variant="cream"
+                    size="default"
+                    align="center"
                     onClick={handleCancel}
-                    className="px-5 py-2.5 rounded-xl border border-purple-200 text-[#697586] font-medium hover:bg-purple-50 transition-colors"
-                >
-                    Cancel
-                </button>
-                <button
+                />
+                <GenericButton
+                    type="button"
+                    title="Update Password"
+                    variant="violet"
+                    size="default"
+                    align="center"
                     onClick={handleSave}
-                    className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#4C1D95] to-[#7C3AED] text-white font-semibold hover:shadow-lg hover:shadow-purple-500/20 transition-all"
-                >
-                    Update Password
-                </button>
+                />
             </div>
 
             <div className="p-6 rounded-2xl border border-purple-100 bg-purple-50/30">
