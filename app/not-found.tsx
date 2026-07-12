@@ -1,29 +1,36 @@
-import Image from 'next/image'
 import React from 'react'
 import Link from 'next/link'
+import GenericButton from '@/components/common/generic-button/GenericButton'
 
 export default function page() {
   return (
-    <div className='flex flex-col items-center justify-center h-[90vh] '  >
+    <div className="flex h-screen w-full items-center justify-center bg-gray-50">
+      <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
+        <div className="flex flex-col items-center gap-6">
+          <h1 className="text-3xl font-bold text-[#4C1D95] font-[Lora] text-center">StreetFood</h1>
 
+          <div className="text-center">
+            <h2 className="text-[#2A3542] font-[Lora] text-2xl font-bold">Ooops!</h2>
+            <p className="text-[#697586] text-sm mt-2">The page you are looking for is not found.</p>
+          </div>
 
-      <div className='w-[1000px] h-[578px] relative'>
-        <Image src="/404.svg" alt="event-bg" fill className='object-contain' />
+          <Link href="/">
+            <GenericButton
+              type="button"
+              title="Go to Home"
+              variant="violet"
+              size="large"
+              align="center"
+              className="w-full"
+            />
+          </Link>
+        </div>
+
+        <div className="mt-8 flex w-full items-center justify-between">
+          <p className="text-sm text-[#697586]">Privacy Policy</p>
+          <p className="text-sm text-[#697586]">Copyright 2026</p>
+        </div>
       </div>
-
-      <div className='max-w-[760px] mx-auto mt-20'>
-       <h2 className='self-stretch text-[color:var(--B,#070707)] text-center [font-family:Lora] text-[40px] font-bold leading-[130%] tracking-[1.6px]'>Ooops!</h2>
-       <p className='text-[color:var(--Stroke,#2A3542)] text-center [font-family:Lora] text-2xl font-bold leading-[130%] tracking-[0.48px] mt-5'>the page are looking for not found!</p>
-
-
-        <Link href="/">
-       <button className='btn-primary mt-10 flex'>
-          Go to Home
-       </button>
-        </Link>
-      </div>
-
-
     </div>
   )
 }

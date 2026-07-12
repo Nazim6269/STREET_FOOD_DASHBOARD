@@ -4,12 +4,12 @@ import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { z } from "zod";
 import useAuth from "@/hooks/useAuth";
-import Image from "next/image";
 import AuthIcons from "../icons/AuthIcons";
 import { Loader2 } from "lucide-react";
-import Checkbox from "../form/Checkbox";
 import { Form } from "@/components/form/Form";
 import { useRouter } from "next/navigation";
+import GenericInput from "@/components/common/generic-input/GenericInput";
+import GenericButton from "@/components/common/generic-button/GenericButton";
 
 
 
@@ -31,7 +31,6 @@ function ForgotPasswordFormFields({
 
     // Get form state from context
     const {
-        register,
         formState: { errors },
     } = useFormContext<ForgotPasswordFormValues>();
 
@@ -44,23 +43,18 @@ function ForgotPasswordFormFields({
             </div>
 
             <div className="relative">
-                <input
+                <GenericInput
+                    name="email"
                     type="email"
-                    autoComplete="email"
                     placeholder="Email"
-                    className="auth-input pl-12"
-                    {...register("email")}
+                    prefix={<AuthIcons.EmailIcon className="h-5 w-5 text-slate-900" />}
+                    size="sm"
                 />
-                <AuthIcons.EmailIcon className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-900" />
-
             </div>
 
             {errors.email && (
                 <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
             )}
-
-
-
 
             {submitError && (
                 <div className="rounded-md border border-red-200 bg-red-50 p-3">
@@ -68,20 +62,16 @@ function ForgotPasswordFormFields({
                 </div>
             )}
 
-            <button
+            <GenericButton
                 type="submit"
+                title={isLoading ? "Logging in..." : "Send Verification Code"}
+                variant="violet"
+                size="large"
+                align="center"
                 disabled={isLoading}
-                className="btn-primary disabled:cursor-not-allowed"
-            >
-                {isLoading ? (
-                    <div className="flex items-center gap-2 text-gray-800">
-                        <Loader2 className="h-4 w-4 animate-spin md:h-5 md:w-5" />
-                        Logging in...
-                    </div>
-                ) : (
-                    "Send Verification Code"
-                )}
-            </button>
+                className="w-full"
+                icon={isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : undefined}
+            />
         </>
     );
 }
@@ -102,30 +92,24 @@ export default function ForgotPasswordForm() {
     };
 
     return (
-        <div className="">
-            
-            <div className="flex min-w-[380px] flex-col items-center gap-[60px] rounded-3xl [background:var(--Opacity-Dark-05,rgba(8,14,30,0.05))] p-5 md:min-w-[600px] md:p-10">
-                <div className="flex w-full max-w-[440px] flex-col items-center gap-[40px]">
-                    <div className="mx-auto w-full max-w-[100px] md:max-w-[150px]">
-                        <Image
-                            src="/images/atliss-logo.png"
-                            alt="logo"
-                            width={100}
-                            height={100}
-                            className="mx-auto" 
-                        />
-                    </div>
+        <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
+            <div className="flex flex-col gap-8 w-full">
+                <h1 className="text-3xl font-bold text-[#4C1D95] font-[Lora] text-center">StreetFood</h1>
+                <p className="text-[#697586] text-sm -mt-4 text-center">Reset your password</p>
 
-                    <Form<ForgotPasswordFormValues>
-                        schema={forgotPasswordSchema}
-                        defaultValues={{ email: "" }}
-                        onSubmit={onSubmit}
-                        className="w-full space-y-4"
-                    >
-                        <ForgotPasswordFormFields isLoading={isLoading} submitError={submitError} />
-                    </Form>
-                </div>
+                <Form<ForgotPasswordFormValues>
+                    schema={forgotPasswordSchema}
+                    defaultValues={{ email: "" }}
+                    onSubmit={onSubmit}
+                    className="w-full space-y-4"
+                >
+                    <ForgotPasswordFormFields isLoading={isLoading} submitError={submitError} />
+                </Form>
+            </div>
 
+            <div className="mt-8 flex w-full items-center justify-between">
+                <p className="text-sm text-[#697586]">Privacy Policy</p>
+                <p className="text-sm text-[#697586]">Copyright 2026</p>
             </div>
         </div>
     );

@@ -3,6 +3,7 @@
 import React from "react";
 import CustomModal from "./reusable/CustomModal";
 import { LogOut } from "lucide-react";
+import GenericButton from "@/components/common/generic-button/GenericButton";
 
 type Props = {
   isOpen: boolean;
@@ -33,19 +34,25 @@ export default function LogoutModal({ isOpen, onClose, onConfirm }: Props) {
         </p>
 
         <div className="flex gap-3 w-full">
-          <button
+          <GenericButton
+            type="button"
+            title="Cancel"
+            variant="cream"
+            size="default"
+            align="center"
             onClick={onClose}
-            className="flex-1 h-12 justify-center items-center rounded-xl border border-purple-200 text-[#697586] font-medium hover:bg-purple-50 transition-colors"
-          >
-            Cancel          
-          </button>
+            className="flex-1"
+          />
 
-          <button
+          <GenericButton
+            type="button"
+            title="Sign out"
+            variant="violet"
+            size="default"
+            align="center"
             onClick={onConfirm}
-            className="flex-1 h-12 justify-center items-center rounded-xl bg-gradient-to-r from-[#4C1D95] to-[#7C3AED] text-white font-semibold hover:shadow-lg hover:shadow-purple-500/20 transition-all"
-          >
-            Sign out
-          </button>
+            className="flex-1"
+          />
         </div>
       </div>
     </CustomModal>
